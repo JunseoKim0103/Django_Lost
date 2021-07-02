@@ -3,28 +3,158 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 - 목록</title>
+    <title>분실물을 찾습니다! - 목록</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
 <header>
-    <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+출처: https://nowonbun.tistory.com/702 [명월 일지]
+    <div class="navbar navbar-dark bg-success shadow-sm mb-3">
         <div class="container d-flex justify-content-between">
             <a href="/" class="navbar-brand d-flex align-items-center">
-                <strong>게시판</strong>
+                <strong>분실물을 찾습니다!</strong>
             </a>
         </div>
     </div>
 </header>
+
+<!--검색창 만들기-->
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>SKKU-Sil</title>
+  <style>
+    h1 {
+        text-align: center;
+        margin-top: 180px;
+        font-size: 90px;
+    }
+    h1 span:nth-child(1) {
+        color:#0b3b35;
+    }
+    h1 span:nth-child(2) {
+        color:#0d7742;
+    }
+    h1 span:nth-child(3) {
+        color:#094d1d;
+    }
+    h1 span:nth-child(4) {
+        color:#06705e;
+    }
+    h1 span:nth-child(5) {
+        color:#d46a23;
+    }
+    h1 span:nth-child(6) {
+        color:#d6781f;
+    }
+    h1 span:nth-child(6) {
+        color:#c4740d;
+    }
+    .search-bar {
+      width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    <span>S</span><span>K</span><span>K</span><span>U</span><span>-</span>S<span>I</span><span>L</span>
+  </h1>
+
+
+<form>
+    <h2><strong>습득물 상세검색</strong></h2>
+    </br>   
+    <input type="checkbox" name="chk_info" value="명륜">명륜
+    <input type="checkbox" name="chk_info" value="율전">율전
+    <input type="checkbox" name="chk_info" value="교외">교외
+</br>
+    <!--추가-->
+</br>
+  <select name="loca">
+    <option value="">위치</option>
+    <option value="경영관">경영관</option>
+    <option value="다산 경제관">다산 경제관</option>
+    <option value="퇴계 인문관">퇴계 인문관</option>
+    <option value="수선관">수선관</option>
+    <option value="법학관">법학관</option>
+    <option value="도서관">도서관</option>
+    <option value="600주년 기념관">600주년 기념관</option>
+    <option value="학생회관">학생회관</option>
+    <option value="교수회관">교수회관</option>
+    <option value="기타">기타</option>
+
+</select>
+
+<select name="cate">
+    <option value="">카테고리</option>
+    <option value="전자기기">전자기기</option>
+    <option value="서류">서류</option>
+    <option value="잡화">잡화</option>
+    <option value="기타">기타</option>
+</select>
+
+<select name="색상">
+    <option value="">색상</option>
+    <option value="흰색">흰색</option>
+    <option value="회색">회색</option>
+    <option value="파랑">파랑</option>
+    <option value="빨강">빨강</option>
+    <option value="초록">초록</option>
+    <option value="기타">기타</option>
+</select>
+
+<!--습득기간-->
+
+
+    <p><input type="date" value="습득기간"></p>
+
+
+
+
+    <p><input type="date" value="습득기간"></p>
+    <p><input type="reset" value="Submit"></p>
+
+
+
+    <input type="reset" value="초기화">
+</form>
+
+  <!-- <form action="https://www.google.com/search" method="GET"></form>-->
+    <div class="mx-auto mt-5 search-bar input-group mb-3">
+      <input name="q" type="text" class="form-control rounded-pill" placeholder="분실물을 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+      <div class="input-group-append">
+      </div>
+    </div>
+  </form>
+</body>
+</html>
+
+
+
+
+
+</br>
+</br>
+</br>
+</br>
 <div class="container">
+
     <table class="table">
         <thead class="thead-light">
         <tr class="text-center">
-            <th scope="col">#</th>
+            <th scope="col">카테고리</th>
             <th scope="col">사진</th>
             <th scope="col">제목</th>
-            <th scope="col">작성자</th>
             <th scope="col">분실날짜</th>
+            <th scope="col">색상</th>
+            <th scope="col">분실위치</th>
             <th scope="col">작성일</th>
             
         </tr>
@@ -32,22 +162,26 @@
         <tbody>
         {% for board in boards %}
         <tr class="text-center">
-            <th scope="row">
-                <span>{{ board.id }}</span>
+            <th>
+                <span>{{ board.category }}</span>
             </th>
             <td>
-                <span>{{ board.mianphoto }}</span>
+                <span> <img src = "{{board.mainphoto.url}}" alt="" width = "40" height = "40"></span>
             </td>
             <td>
                 <a href="/post/{{ board.id }}">
                     <span>{{ board.title }}</span>
                 </a>
             </td>
-            <td>
-                <span>{{ board.author }}</span>
-            </td>
+            
             <td>
                 <span>{{ board.Lost_date | date:"Y-m-d" }}</span>
+            </td>
+            <td>
+                <span>{{ board.color }}</span>
+            </td>
+            <td>
+                <span>{{ board.location }}</span>
             </td>
             <td>
                 <span>{{ board.created_date | date:"Y-m-d h:i" }}</span>
@@ -64,5 +198,30 @@
     </div>
 </div>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<ul class="pagination">
+    <!-- li태그의 클래스에 disabled를 넣으면 마우스를 위에 올렸을 때 클릭 금지 마크가 나오고 클릭도 되지 않는다.-->
+    <!-- disabled의 의미는 앞의 페이지가 존재하지 않다는 뜻이다. -->
+    <li class="disabled">
+    <a href="#">
+    <span>«</span>
+    </a>
+    </li>
+    <!-- li태그의 클래스에 active를 넣으면 색이 반전되고 클릭도 되지 않는다. -->
+    <!-- active의 의미는 현재 페이지의 의미이다. -->
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+    <a href="#">
+    <span>»</span>
+    </a>
+    </li>
+ </ul>
+    
+    
+    
 </body>
 </html>

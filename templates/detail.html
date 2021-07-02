@@ -3,45 +3,83 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 - {{ board.title }}</title>
+    <title>분실물을 찾습니다! - {{ board.title }}</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
 <header>
-    <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+    <div class="navbar navbar-dark bg-success shadow-sm mb-3">
         <div class="container d-flex justify-content-between">
             <a href="/" class="navbar-brand d-flex align-items-center">
-                <strong>게시판</strong>
+                <strong>분실물을 찾습니다!</strong>
             </a>
         </div>
     </div>
 </header>
+</br>
+</br>
+</br>
 <div class="container">
     <div class="card">
         <div class="card-body">
             <h2 class="card-title"><strong>제목: {{ board.title }}</strong></h2>
+            </br>
             <h5 class="card-title"><strong>작성자: {{ board.author }}</strong></h5>
             <p class="card-text"><small class="text-muted">분실일자: {{ board.Lost_date | date:"Y-m-d" }}</small></p>
-            <!--그림을 추가한다.-->
-            <h3 class="card-title"><strong>내용:</strong></h3>
-            <h5 class="card-title"><strong>사진: {{board.mainphoto}}</strong></h5>
+            <p class="card-text"><small class="text-muted"></small>분실 위치: {{ board.location }}</small></p>
+            <p class="card-text">카테고리: {{ board.category }}</p>
+            <p class="card-text">색상: {{ board.color }}</p>
+            
+            <h5 class="card-title"><strong>사진: </br></br> <img src = "{{board.mainphoto.url}}"alt="" width = 400 height = 400></strong></h5>
             </br>
+            </br>
+            <h3 class="card-title"><strong>내용: </strong></h3>
             <p class="card-text">{{ board.content }}</p>
+            
+            
+
         </div>
     </div>
     <div class="row mt-3">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-            <a class="btn btn-info" href="/post/edit/{{ board.id }}" role="button">수정</a>
+            <a class="btn btn-info" href="/post/edit/{{ board.id }}" role="button">문의</a>
         </div>
         <div class="col-auto">
             <form id="delete-form" action="/post/delete/{{ board.id }}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
-                <button id="delete-btn" type="submit" class="btn btn-danger">삭제</button>
+                <button id="delete-btn" type="submit" class="btn btn-danger">신고</button>
+            </br>
+            </br>
             </form>
         </div>
     </div>
 </div>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+
+   
+
+<div class="card mb-2" style= margin-top:100px>
+
+	<div class="card-header bg-light"  >
+	        <i class="fa fa-comment fa"></i> 댓글
+	</div>
+	<div class="card-body">
+		<ul class="list-group list-group-flush">
+		    <li class="list-group-item">
+			<div class="form-inline mb-2">
+				<label for="replyId"><i class="fa fa-user-circle-o fa-2x"></i></label>
+				<input type="text" class="form-control ml-2" placeholder="아이디를 입력하세요" id="replyId">
+				<label for="replyPassword" class="ml-4"><i class="fa fa-unlock-alt fa-2x"></i></label>
+				<input type="password" class="form-control ml-2" placeholder="패스워드를 입력하세요" id="replyPassword">
+			</div>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();">게시</button>
+		    </li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>

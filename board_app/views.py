@@ -11,12 +11,15 @@ def index(request):
 
 def post(request):
     if request.method == "POST":
+        category = request.POST['category']
+        color = request.POST['color']
         author = request.POST['author']
         title = request.POST['title']
         content = request.POST['content']
-        Lost_date = request.POST['Lost_date'] #추가
-        mainphoto = request.POST['mainphoto']
-        board = Board(author=author, mainphoto=mainphoto, title=title, content=content, Lost_date = Lost_date)
+        Lost_date = request.POST['Lost_date'] 
+        location = request.POST['location']
+        mainphoto = request.FILES['mainphoto']
+        board = Board(category = category, author=author, mainphoto=mainphoto, title=title, content=content, color = color, location = location, Lost_date = Lost_date)
         board.save()
         return HttpResponseRedirect(reverse('index'))
     else:
@@ -28,3 +31,4 @@ def detail(request, id):
     except Board.DoesNotExist:
         raise Http404("Does not exist!")
     return render(request, 'detail.html', {'board': board})
+
